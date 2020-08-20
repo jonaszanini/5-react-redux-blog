@@ -1,12 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { fetchUser } from "../actions";
 
-class UserHeader extends Component {
-    componentDidMount() {
-        this.props.fetchUser(this.props.userId);
-    }
-
+class UserHeader extends React.Component {
     render() {
         const { user } = this.props;
 
@@ -14,13 +9,12 @@ class UserHeader extends Component {
             return null;
         }
 
-        return <div className="header">{user.name} </div>;
+        return <div className="header">{user.name}</div>;
     }
 }
 
-//get data from Redux Store
-const mapStateToProps = (state, onwProps) => {
-    return { user: state.users.find((user) => user.id === onwProps.userId) };
+const mapStateToProps = (state, ownProps) => {
+    return { user: state.users.find((user) => user.id === ownProps.userId) };
 };
 
-export default connect(mapStateToProps, { fetchUser })(UserHeader);
+export default connect(mapStateToProps)(UserHeader);
